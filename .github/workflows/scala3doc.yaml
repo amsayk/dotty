@@ -3,7 +3,6 @@ name: CI for Scala3doc
 on:
   push:
     branches:
-      - master
   pull_request_target:
 jobs:
   build:
@@ -24,7 +23,7 @@ jobs:
             echo checking $REF
             git fetch origin $REF:$REF
             git checkout $REF
-          fi     
+          fi
 
       - name: Cache Coursier
         uses: actions/cache@v1
@@ -68,7 +67,7 @@ jobs:
 
       - name: Upload documentation to server
         uses: azure/CLI@v1
-        env: 
+        env:
           AZURE_STORAGE_SAS_TOKEN: ${{ secrets.AZURE_STORAGE_SAS_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         with:
